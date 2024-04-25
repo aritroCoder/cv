@@ -165,8 +165,9 @@ class LLEDataset(Dataset):
         return self.x[idx], self.y[idx]
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
 model = Model(kernel=5)
-model= nn.DataParallel(model)
+model= nn.DataParallel(model) # Uncomment this line if you want to use multiple GPUs
 model.to(device)
 
 model.load_state_dict(torch.load('/DATA/sujit_2021cs35/cv/Autoencoder/model_weights.pth'))
