@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from skimage.metrics import structural_similarity as ssim
 
-groundTruth_dir = './ground_truth/'
+groundTruth_dir = './lol_dataset/eval15/high/'
 output_dir_ae = './output_dir/Autoencoder/'
 output_dir_hist = './output_dir/HistogramEq/'
 output_dir_retinex = './output_dir/RetinexNet/'
