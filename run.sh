@@ -48,11 +48,12 @@ export CUDA_VISIBLE_DEVICES=2,3
 echo "Run: python ./Autoencoder/run_model.py "+$input_dir" "+" "$output_dir_auto
 python ./Autoencoder/run_model.py $input_dir $output_dir_auto
 
+echo "Run: python ./HistogramEqualization/histeq.py "+$input_dir" "+" "$output_dir_hist
+python ./HistogramEqualization/histeq.py $input_dir $output_dir_hist
+
 # deactivate the environment
 source deactivate
 
-echo "Run: python ./HistogramEqualization/histeq.py "+$input_dir" "+" "$output_dir_hist
-python ./HistogramEqualization/histeq.py $input_dir $output_dir_hist
 
 echo "Output directories are created at: "
 echo $output_dir_auto

@@ -87,7 +87,7 @@ def load_images(path, augment=True):
             img4 = cv.rotate(img, cv.ROTATE_90_COUNTERCLOCKWISE)
             x.append(img_to_array(img4, data_format="channels_first"))
 
-    return x
+    return x, image_paths
 
 class Downsample(nn.Module):
     def __init__(self, in_channels, filters, kernel_size, apply_batch_normalization=True):
@@ -177,13 +177,15 @@ parser.add_argument('input', type=str, help='Directory with images to be enhance
 parser.add_argument('output', type=str, help='Directory to save enhanced images')
 
 args = parser.parse_args()
-test_x = load_images(args.input, augment=False)
+test_x, img_path = load_images(args.input, augment=False)
 
 for i in range(len(test_x)):
     input_img = torch.tensor(test_x[i]).unsqueeze(0).to(device)
     yhat = model(input_img).cpu().detach().numpy()
     predicted = np.clip(yhat,0.0,1.0)
-    op_path = os.path.join(args.output, f'{i}.png')
+    # get the name of the img file from img_path and save the enhanced image
+    imgname = os.path.basename(img_path[i])
+    op_path = os.path.join(args.output, f'{imgname}')
     plt.imsave(op_path, predicted.squeeze(0).transpose(1, 2, 0))
 
 # python ./Autoencoder/run_model.py /DATA/sujit_2021cs35/cv/Autoencoder/test_img_resized /DATA/sujit_2021cs35/cv/Autoencoder/output_img
