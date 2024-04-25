@@ -42,22 +42,22 @@ def calculate_psnr_ssim(groundTruth_dir, output_dir, suffix=None):
     return results
 
 results_ae = calculate_psnr_ssim(groundTruth_dir, output_dir_ae)
-df = pd.DataFrame(results_ae, columns=['Image', 'PSNR', 'SSIM'])
-df.to_csv(benchmark_results_ae, index=False)
+df_1 = pd.DataFrame(results_ae, columns=['Image', 'PSNR', 'SSIM'])
+df_1.to_csv(benchmark_results_ae, index=False)
 
 print('Benchmark results saved in', benchmark_results_ae)
-print(df)
+print(df_1)
 
 results_hist = calculate_psnr_ssim(groundTruth_dir, output_dir_hist)
-df = pd.DataFrame(results_hist, columns=['Image', 'PSNR', 'SSIM'])
-df.to_csv(benchmark_results_hist, mode='a', index=False)
+df_2 = pd.DataFrame(results_hist, columns=['Image', 'PSNR', 'SSIM'])
+df_2.to_csv(benchmark_results_hist, index=False)
 
 print('Benchmark results saved in', benchmark_results_hist)
-print(df)
+print(df_2)
 
 results_retinex = calculate_psnr_ssim(groundTruth_dir, output_dir_retinex, suffix="_S")
-df = pd.DataFrame(results_retinex, columns=['Image', 'PSNR', 'SSIM'])
-df.to_csv(benchmark_results_retinex, mode='a', index=False)
+df_3 = pd.DataFrame(results_retinex, columns=['Image', 'PSNR', 'SSIM'])
+df_3.to_csv(benchmark_results_retinex, index=False)
 
 print('Benchmark results saved in', benchmark_results_retinex)
-print(df)
+print(df_3)
