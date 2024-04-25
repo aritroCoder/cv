@@ -33,11 +33,6 @@ mkdir -p $output_dir_hist
 mkdir -p $output_dir_reti
 
 # set environment to cv
-source activate cv
-echo "Run: python ./Autoencoder/run_model.py "+$input_dir" "+" "$output_dir_auto
-python ./Autoencoder/run_model.py $input_dir $output_dir_auto
-echo "Run: python ./HistogramEqualization/histeq.py "+$input_dir" "+" "$output_dir_hist
-python ./HistogramEqualization/histeq.py $input_dir $output_dir_hist
 
 source activate py36
 cd RetinexNet
@@ -47,6 +42,17 @@ cd $workdir
 
 # deactivate the environment
 source deactivate
+
+source activate cv
+export CUDA_VISIBLE_DEVICES=2,3
+echo "Run: python ./Autoencoder/run_model.py "+$input_dir" "+" "$output_dir_auto
+python ./Autoencoder/run_model.py $input_dir $output_dir_auto
+
+# deactivate the environment
+source deactivate
+
+echo "Run: python ./HistogramEqualization/histeq.py "+$input_dir" "+" "$output_dir_hist
+python ./HistogramEqualization/histeq.py $input_dir $output_dir_hist
 
 echo "Output directories are created at: "
 echo $output_dir_auto
